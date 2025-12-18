@@ -54,14 +54,14 @@ async function runExperiment(name, n, mealsPerPhilosopher, startMethod) {
 
     console.log(`\n=== Running ${name} (N=${n}, meals=${mealsPerPhilosopher}) ===\n`);
 
+    const eventsBefore = getEventLog().length;
     await Promise.all(startMethod(philosophers, forks, mealsPerPhilosopher));
+    const eventsAfter = getEventLog().length;
 
     return {
         runId,
         name,
-        n,
-        mealsPerPhilosopher,
-        log: [...getEventLog()]
+        eventCount: eventsAfter - eventsBefore
     };
 }
 
@@ -98,15 +98,9 @@ async function main() {
     fs.writeFileSync(combinedFilename, allLogs.map(e => JSON.stringify(e)).join('\n'));
     console.log(`\nSaved ${allLogs.length} total events to ${combinedFilename}`);
 
-    for (const result of results) {
-        const filename = `logs/${result.name}-n${result.n}-m${result.mealsPerPhilosopher}.jsonl`;
-        fs.writeFileSync(filename, result.log.map(e => JSON.stringify(e)).join('\n'));
-        console.log(`Saved ${result.log.length} events to ${filename}`);
-    }
-
     console.log('\n=== Experiment Summary ===');
     for (const result of results) {
-        console.log(`  ${result.name}: runId=${result.runId}, events=${result.log.length}`);
+        console.log(`  ${result.name}: runId=${result.runId}, events=${result.eventCount}`);
     }
     console.log('\n=== All experiments completed ===\n');
 }
