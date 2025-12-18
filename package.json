@@ -1,0 +1,28 @@
+{
+  "name": "conc-phil5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "philosophers.js",
+  "scripts": {
+    "test": "jest",
+    "test:asymmetric": "jest --testNamePattern='Asymmetric algorithm'",
+    "test:conductor": "jest --testNamePattern='Conductor algorithm'",
+    "test:simultaneous": "jest --testNamePattern='Simultaneous algorithm'",
+    "test:unit": "jest --testNamePattern='^(?!.*(Asymmetric|Conductor|Simultaneous)).*$'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balis/conc-phil5.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/balis/conc-phil5/issues"
+  },
+  "homepage": "https://github.com/balis/conc-phil5#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}

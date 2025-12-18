@@ -1,0 +1,74 @@
+{
+  "tests": [
+    {
+      "name": "Asymmetric algorithm - completion",
+      "setup": "npm ci",
+      "run": "npm test -- --testNamePattern='Asymmetric algorithm.*all philosophers complete'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 20
+    },
+    {
+      "name": "Asymmetric algorithm - mutual exclusion",
+      "setup": "",
+      "run": "npm test -- --testNamePattern='Asymmetric algorithm.*mutual exclusion'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 10
+    },
+    {
+      "name": "Conductor algorithm - completion",
+      "setup": "",
+      "run": "npm test -- --testNamePattern='Conductor algorithm.*all philosophers complete'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 20
+    },
+    {
+      "name": "Conductor algorithm - mutual exclusion",
+      "setup": "",
+      "run": "npm test -- --testNamePattern='Conductor algorithm.*mutual exclusion'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 10
+    },
+    {
+      "name": "Simultaneous algorithm - completion",
+      "setup": "",
+      "run": "npm test -- --testNamePattern='Simultaneous algorithm.*all philosophers complete'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 20
+    },
+    {
+      "name": "Simultaneous algorithm - mutual exclusion",
+      "setup": "",
+      "run": "npm test -- --testNamePattern='Simultaneous algorithm.*mutual exclusion'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 10
+    },
+    {
+      "name": "Simultaneous algorithm - atomic fork acquisition",
+      "setup": "",
+      "run": "npm test -- --testNamePattern='Simultaneous algorithm.*atomically'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 60,
+      "points": 10
+    }
+  ]
+}
