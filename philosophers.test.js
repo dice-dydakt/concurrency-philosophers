@@ -335,11 +335,6 @@ describe('Asymmetric algorithm - log analysis', () => {
     const N = 5;
     const MEALS = 10;
 
-    beforeAll(() => {
-        // Load solutions to get the reference implementation
-        require('./solutions');
-    });
-
     beforeEach(() => {
         clearEventLog();
     });
@@ -391,19 +386,13 @@ describe('Asymmetric algorithm - log analysis', () => {
 describe('Conductor algorithm - log analysis', () => {
     const N = 5;
     const MEALS = 10;
-    let Conductor;
-
-    beforeAll(() => {
-        // Load solutions to get the reference Conductor implementation
-        const solutions = require('./solutions');
-        Conductor = solutions.Conductor;
-    });
 
     beforeEach(() => {
         clearEventLog();
     });
 
     test('all philosophers complete required meals', async () => {
+        const { Conductor } = require('./philosophers');
         const log = await runAlgorithm('conductor', N,
             (philosophers) => {
                 const conductor = new Conductor(N - 1);
@@ -419,6 +408,7 @@ describe('Conductor algorithm - log analysis', () => {
     }, 30000);
 
     test('no mutual exclusion violations', async () => {
+        const { Conductor } = require('./philosophers');
         const log = await runAlgorithm('conductor', N,
             (philosophers) => {
                 const conductor = new Conductor(N - 1);
@@ -431,6 +421,7 @@ describe('Conductor algorithm - log analysis', () => {
     }, 30000);
 
     test('valid event sequences', async () => {
+        const { Conductor } = require('./philosophers');
         const log = await runAlgorithm('conductor', N,
             (philosophers) => {
                 const conductor = new Conductor(N - 1);
@@ -446,11 +437,6 @@ describe('Conductor algorithm - log analysis', () => {
 describe('Simultaneous algorithm - log analysis', () => {
     const N = 5;
     const MEALS = 10;
-
-    beforeAll(() => {
-        // Load solutions to get the reference implementation
-        require('./solutions');
-    });
 
     beforeEach(() => {
         clearEventLog();
