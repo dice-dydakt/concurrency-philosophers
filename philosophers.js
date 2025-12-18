@@ -58,8 +58,8 @@ class Fork {
     // 1. Before the first attempt, wait 1ms
     // 2. If fork is taken, double the wait time and retry
     // 3. On success, set state = 1 and holder = requesterId
-    async acquire(requesterId, forks) {
-        log(requesterId, 'TRY', forks);
+    async acquire(requesterId) {
+        log(requesterId, 'TRY', [this.id]);
 
         let waitTime = 1;
         const maxWait = 1000;
@@ -68,7 +68,7 @@ class Fork {
             if (this.state === 0) {
                 this.state = 1;
                 this.holder = requesterId;
-                log(requesterId, 'ACQUIRE', forks);
+                log(requesterId, 'ACQUIRE', [this.id]);
                 return;
             }
             await delay(waitTime);
@@ -76,13 +76,13 @@ class Fork {
         }
     }
 
-    release(requesterId, forks) {
+    release(requesterId) {
         if (this.holder !== requesterId) {
             throw new Error(`Philosopher ${requesterId} cannot release fork held by ${this.holder}`);
         }
         this.state = 0;
         this.holder = null;
-        log(requesterId, 'RELEASE', forks);
+        log(requesterId, 'RELEASE', [this.id]);
     }
 }
 
@@ -110,8 +110,8 @@ class Philosopher {
 
         for (let i = 0; i < count; i++) {
             // Pick up left fork first, then right
-            await forks[f1].acquire(this.id, [f1, f2]);
-            await forks[f2].acquire(this.id, [f1, f2]);
+            await forks[f1].acquire(this.id);
+            await forks[f2].acquire(this.id);
 
             // Eat - repeat this in every implementation
             this.log('EAT_START');
@@ -119,8 +119,8 @@ class Philosopher {
             this.log('EAT_END');
 
             // Release forks
-            forks[f1].release(this.id, [f1, f2]);
-            forks[f2].release(this.id, [f1, f2]);
+            forks[f1].release(this.id);
+            forks[f2].release(this.id);
         }
     }
 

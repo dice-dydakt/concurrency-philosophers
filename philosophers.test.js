@@ -32,31 +32,31 @@ describe('Fork', () => {
     test('release should set state to 0 and holder to null', () => {
         fork.state = 1;
         fork.holder = 2;
-        fork.release(2, [0, 1]);
+        fork.release(2);
         expect(fork.state).toBe(0);
         expect(fork.holder).toBeNull();
     });
 
-    test('acquire should accept requesterId and forks parameters', () => {
-        expect(fork.acquire.length).toBe(2);
+    test('acquire should accept requesterId parameter', () => {
+        expect(fork.acquire.length).toBe(1);
     });
 
     test('release should throw if requesterId does not match holder', () => {
         fork.state = 1;
         fork.holder = 1;
-        expect(() => fork.release(2, [0, 1])).toThrow('Philosopher 2 cannot release fork held by 1');
+        expect(() => fork.release(2)).toThrow('Philosopher 2 cannot release fork held by 1');
     });
 
     test('release should throw if fork has no holder', () => {
         fork.state = 1;
         fork.holder = null;
-        expect(() => fork.release(0, [0, 1])).toThrow('Philosopher 0 cannot release fork held by null');
+        expect(() => fork.release(0)).toThrow('Philosopher 0 cannot release fork held by null');
     });
 
     test('release should succeed when requesterId matches holder', () => {
         fork.state = 1;
         fork.holder = 3;
-        expect(() => fork.release(3, [0, 1])).not.toThrow();
+        expect(() => fork.release(3)).not.toThrow();
         expect(fork.state).toBe(0);
         expect(fork.holder).toBeNull();
     });
@@ -64,12 +64,12 @@ describe('Fork', () => {
     test('release should log RELEASE event', () => {
         fork.state = 1;
         fork.holder = 2;
-        fork.release(2, [0, 1]);
+        fork.release(2);
         const log = getEventLog();
         expect(log.length).toBe(1);
         expect(log[0].phil).toBe(2);
         expect(log[0].event).toBe('RELEASE');
-        expect(log[0].forks).toEqual([0, 1]);
+        expect(log[0].forks).toEqual([0]);
         expect(typeof log[0].t).toBe('number');
     });
 });
