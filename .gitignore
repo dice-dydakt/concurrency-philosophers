@@ -2,7 +2,8 @@ node_modules/
 coverage/
 .DS_Store
 *.log
-logs/
+logs/*
+!logs/reference-solutions-500meals.jsonl.gz
 *.png
 *.html
 .claude/
